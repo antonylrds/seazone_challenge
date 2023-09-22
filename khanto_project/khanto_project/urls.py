@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from realties import urls as realties_urls
-
+from ads import urls as ads_urls
+from reservations import urls as reservations_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/realties', include(realties_urls))
+    path('admin', admin.site.urls),
+    path('api/ads/', include(ads_urls)),
+    path('api/realties/', include(realties_urls)),
+    path('api/reservations/', include(reservations_urls)),
 ]
