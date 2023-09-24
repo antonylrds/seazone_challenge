@@ -3,14 +3,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Realties
 from .serializers import RealtiesSerializer
+from drf_yasg.utils import swagger_auto_schema
 
 from .utils import get_now
 
 class RealtiesListView(APIView):
+    @swagger_auto_schema(responses={200: RealtiesSerializer(many=True)})
     def get(self, request):
         realties = Realties.objects.all()
         serializer = RealtiesSerializer(realties, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
     
     def post(self, request):
         serializer = RealtiesSerializer(data=request.data)
